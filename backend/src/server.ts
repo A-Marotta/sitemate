@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { Request, Response } from 'express';
 import Issue from './issue';
 
@@ -16,6 +17,7 @@ class Server {
 
     private configureMiddleware(): void {
         this.app.use(express.json());
+        this.app.use(cors());
     }
 
     private configureRoutes(): void {
@@ -23,8 +25,7 @@ class Server {
         this.app.use('/api', router);
 
         router.post('/create', this.handleCreate.bind(this));
-        router.post('/create', this.handleCreate.bind(this));
-        router.get('/read', this.handleRead.bind(this));
+        router.get('/readAll', this.handleReadAll.bind(this));
         router.put('/update/:id', this.handleUpdate.bind(this));
         router.delete('/delete/:id', this.handleDelete.bind(this));
     }
@@ -42,7 +43,7 @@ class Server {
         });
     }
 
-    private handleRead(req: Request, res: Response): void {
+    private handleReadAll(req: Request, res: Response): void {
         // requests a JSON object & prints it out
         console.log(this.issues);
 
