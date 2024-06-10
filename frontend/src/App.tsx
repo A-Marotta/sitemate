@@ -4,6 +4,7 @@ import CreateIssue from './components/CreateIssue';
 import Divider from './components/Divider';
 import { ENDPOINTS } from './utils/constants';
 import { Issue } from './utils/types';
+import ReadIssue from './components/ReadIssue';
 
 function App() {
     const handleReadAll = (): void => {
@@ -13,16 +14,6 @@ function App() {
             })
             .catch(error => {
                 console.error('Error reading all issues:', error);
-            });
-    };
-
-    const handleReadById = (id: number): void => {
-        axios.get(`${ENDPOINTS.READ}/${id}`)
-            .then(response => {
-                console.log('Issue:', response.data);
-            })
-            .catch(error => {
-                console.error('Error reading issue by ID:', error);
             });
     };
 
@@ -51,7 +42,7 @@ function App() {
             <CreateIssue />
             <Divider />
             <button onClick={handleReadAll}>Read All Issues</button>
-            <button onClick={() => handleReadById(1)}>Read Issue by ID</button>
+            <ReadIssue />
             <button onClick={() => handleUpdate(1, { title: 'Updated Title', description: 'Updated Description' })}>Update Issue</button>
             <button onClick={() => handleDelete(1)}>Delete Issue</button>
         </div>
