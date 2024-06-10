@@ -6,7 +6,7 @@ dotenv.config();
 
 (() => {
     const config = getConfig();
-    const port = config.server.port || 3000;
+    const port = config.server.port || 4000;
 
     const server: Server = new Server(port);
     server.start();
