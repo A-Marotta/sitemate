@@ -26,6 +26,7 @@ class Server {
 
         router.post('/create', this.handleCreate.bind(this));
         router.get('/readAll', this.handleReadAll.bind(this));
+        router.get('/read/:id', this.handleRead.bind(this));
         router.put('/update/:id', this.handleUpdate.bind(this));
         router.delete('/delete/:id', this.handleDelete.bind(this));
     }
@@ -44,10 +45,21 @@ class Server {
     }
 
     private handleReadAll(req: Request, res: Response): void {
-        // requests a JSON object & prints it out
         console.log(this.issues);
 
         res.status(200).send(this.issues);
+    }
+
+    private handleRead(req: Request, res: Response): void {
+        // requests a JSON object & prints it out
+        const id: number = Number(req.params.id);
+
+        const issue = this.issues.find(issue => issue.id === id);
+        if (issue) {
+            res.status(200).send(issue);
+        } else {
+            res.status(404).send('Issue not found');
+        }
     }
 
     private handleUpdate(req: Request, res: Response): void {
