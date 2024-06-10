@@ -3,3 +3,5 @@ node_modules/
 
 # TypeScript compiled output
 dist/
+
+.DS_Store
