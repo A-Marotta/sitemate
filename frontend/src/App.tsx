@@ -1,22 +1,11 @@
 import axios from 'axios';
 import './App.css';
+import CreateIssue from './components/CreateIssue';
+import Divider from './components/Divider';
 import { ENDPOINTS } from './utils/constants';
 import { Issue } from './utils/types';
 
 function App() {
-    const handleCreate = (): void => {
-        axios.post(ENDPOINTS.CREATE, {
-            title: 'New issue',
-            description: 'Issue description'
-        })
-            .then(response => {
-                console.log('Issue created successfully:', response.data);
-            })
-            .catch(error => {
-                console.error('Error creating issue:', error);
-            });
-    };
-
     const handleReadAll = (): void => {
         axios.get(ENDPOINTS.READ_ALL)
             .then(response => {
@@ -58,15 +47,9 @@ function App() {
     };
 
     return (
-        <div style={{
-            padding: 20,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 20,
-            width: 200,
-            margin: '0 auto'
-        }}>
-            <button onClick={handleCreate}>Create Issue</button>
+        <div className="container">
+            <CreateIssue />
+            <Divider />
             <button onClick={handleReadAll}>Read All Issues</button>
             <button onClick={() => handleReadById(1)}>Read Issue by ID</button>
             <button onClick={() => handleUpdate(1, { title: 'Updated Title', description: 'Updated Description' })}>Update Issue</button>
